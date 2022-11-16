@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 async function signToken (userDetails) {
   try {
-    const accessToken = await jwt.sign(userDetails, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7 days' });
+    const accessToken = await jwt.sign(userDetails, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.TOKEN_EXP || '1h' });
     return accessToken
   } catch (err) {
     throw err;
