@@ -47,7 +47,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     mobileNumber: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
     },
     upliveName: {
       type: DataTypes.STRING,
@@ -69,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     videoLink: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       // validate: {
       //   isUrl: true
       // }
@@ -76,6 +78,7 @@ module.exports = (sequelize, DataTypes) => {
     facebookAccount: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       // validate: {
       //   isUrl: true
       // }
@@ -83,6 +86,7 @@ module.exports = (sequelize, DataTypes) => {
     instagramAccount: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       // validate: {
       //   isUrl: true
       // }
@@ -90,6 +94,7 @@ module.exports = (sequelize, DataTypes) => {
     tiktokAccount: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       // validate: {
       //   isUrl: true
       // }

@@ -72,11 +72,23 @@ exports.add = async (userPayload, hostDetails, files) => {
     return result
   } catch (err) {
     console.log(`${serviceName}.service.add - ERROR \n ${err.message} \n ${err.stack}`);
-
+    
     if (err.name === 'SequelizeValidationError') {
       throw new Errors(HTTP_STATUS.BadRequestError, ERROR_MESSAGE.ERR4001002);
     } else if (err.name === 'SequelizeUniqueConstraintError') {
-      throw new Errors(HTTP_STATUS.BadRequestError, ERROR_MESSAGE.ERR4001006);
+      const fieldMap = {
+        id: 'upLive ID',
+        email: 'email',
+        mobileNumber: 'mobile number',
+        upliveName: 'upLive name',
+        videoLink: 'video URL',
+        facebookAccount: 'Facebook URL',
+        instagramAccount: 'Instagram URL',
+        tiktokAccount: 'TikTok URL',
+      }
+      const field = fieldMap[err?.errors[0]?.path] || 'details';
+      const message = { message: { title: 'Account Details Taken', description: `An account with the same ${field} already exists.` } }
+      throw new Errors(HTTP_STATUS.BadRequestError, message);
     }
     throw err;
   }
@@ -130,7 +142,19 @@ exports.update = async (userPayload, hostId, updatedHostDetails, files) => {
     if (err.name === 'SequelizeValidationError') {
       throw new Errors(HTTP_STATUS.BadRequestError, ERROR_MESSAGE.ERR4001002);
     } else if (err.name === 'SequelizeUniqueConstraintError') {
-      throw new Errors(HTTP_STATUS.BadRequestError, ERROR_MESSAGE.ERR4001006);
+      const fieldMap = {
+        id: 'upLive ID',
+        email: 'email',
+        mobileNumber: 'mobile number',
+        upliveName: 'upLive name',
+        videoLink: 'video URL',
+        facebookAccount: 'Facebook URL',
+        instagramAccount: 'Instagram URL',
+        tiktokAccount: 'TikTok URL',
+      }
+      const field = fieldMap[err?.errors[0]?.path] || 'details';
+      const message = { message: { title: 'Account Details Taken', description: `An account with the same ${field} already exists.` } }
+      throw new Errors(HTTP_STATUS.BadRequestError, message);
     }
     throw err;
   }

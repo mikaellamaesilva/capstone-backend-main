@@ -57,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     mobileNumber: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
     },
     avatarImageUrl: {
       type: DataTypes.STRING,
